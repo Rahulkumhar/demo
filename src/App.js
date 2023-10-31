@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { useDispatch, useSelector } from "react-redux";
+import "./App.css";
+import { productList } from "./redux/ProductAction";
+import Counter from "./components/counter";
 
 function App() {
+  const counterRes = useSelector((state) => state.productListData);
+  console.log("App js parent component", counterRes);
+  const dispatch = useDispatch();
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <div className="flex">
+        <Counter />
+        <button
+          className="button-product"
+          onClick={() => dispatch(productList())}
         >
-          Learn React
-        </a>
-      </header>
+          {" "}
+          Get Product card
+        </button>
+      </div>
     </div>
   );
 }
